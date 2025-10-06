@@ -59,10 +59,17 @@ function renderFromData(data){
   });
 }
 
-function buildGNB(active){
+/* basePath:
+ * - index.html에서 호출: "./pages"  → ./pages/pageN.html
+ * - 각 pageN.html에서 호출: "."      → ./pageN.html
+ */
+function buildGNB(active, basePath="."){
   const nav=document.getElementById("gnb");
   ["page1","page2","page3","page4","page5","page6","page7"].forEach(p=>{
-    const a=document.createElement("a"); a.href=`./${p}.html`; a.textContent=p.toUpperCase();
-    if(p===active) a.className="active"; nav.appendChild(a);
+    const a=document.createElement("a");
+    a.href=`${basePath}/${p}.html`;
+    a.textContent=p.toUpperCase();
+    if(p===active) a.className="active";
+    nav.appendChild(a);
   });
 }
